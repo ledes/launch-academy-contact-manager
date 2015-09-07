@@ -1,7 +1,33 @@
 <h1>Contacts</h1>
+<nav>
+  <ul>
+    <% if @page > 0 %>
+          <li>
+            <a href="/?page=<%= @page - 1 %>"> Previous </a>
+          </li>
+        <% end %>
+      <li>
+        <a href="/"> Home </a>
+      </li>
+      <% if @contacts.count == 3 %>
+        <li>
+          <a href="/?page=<%= @page + 1 %>"> Next </a>
+        </li>
+    <% end %>
+  </ul>
+</nav>
 
 <ul>
   <% @contacts.each do |contact| %>
-    <li><%= contact.name %> - <%= contact.phone_number %></li>
+    <li><a href="/contacts/<%= contact.id%>"><%= contact.name %></a> - <%= contact.phone_number %></li>
   <% end %>
 </ul>
+
+<form action="/" method="get">
+  <input type="text" name="search">
+  <input type="submit" value="Search by Name">
+</form>
+
+<footer>
+  <p><a href="/submit">Create New Contact</a><p>
+</footer>
